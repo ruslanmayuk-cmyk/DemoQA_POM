@@ -30,4 +30,14 @@ public class HomePage extends BasePage {
         return new SidePanel(driver);
 
     }
+
+    @FindBy(css = ".card:nth-child(4)")
+    WebElement widgets;
+
+    public SidePanel getWidgets() {
+        clickWithJS(widgets,0,300);
+        return new SidePanel(driver);
+    }
+
+
 }

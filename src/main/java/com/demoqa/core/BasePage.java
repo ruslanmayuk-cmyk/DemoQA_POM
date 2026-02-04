@@ -1,24 +1,28 @@
 package com.demoqa.core;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.swing.*;
 import java.time.Duration;
 
 public class BasePage {
 
     protected WebDriver driver;
     public static JavascriptExecutor js;
+    public static SoftAssertions softly;
+    public static Actions actions;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         js = (JavascriptExecutor) driver;
+        softly = new SoftAssertions();
+        actions = new Actions(driver) ;
 
     }
 
@@ -39,6 +43,7 @@ public class BasePage {
     }
 
     public void click(WebElement element) {
+        getWait(5).until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
@@ -70,6 +75,29 @@ public class BasePage {
         }
     }
 
+    // new method
+    public void clickWithPureJS(WebElement element) {
+        js.executeScript("arguments[0].click();", element);
+    }
 
 
+    public boolean containsText(String title, WebElement element){
+        return element.getText().contains(title);
+    }
+
+    public boolean isElementVisible(WebElement element) {
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+            return false;
+        }
+
+    }
+
+    public void waitOfElementVisibility(WebElement element, int time){
+        getWait(time).until(ExpectedConditions.visibilityOf(element));
+
+    }
 }
