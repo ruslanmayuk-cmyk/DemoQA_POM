@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.swing.*;
 import java.time.Duration;
 
 public class BasePage {
@@ -27,17 +26,18 @@ public class BasePage {
     }
 
     // Скроллим на заданные координаты
-    public void scrollWithJS(int x, int y){
+    public void scrollWithJS(int x, int y, int millis){
+        pause(millis);
         js.executeScript ( "window.scrollBy(" + x + ", " + y + ") ");
     }
 
     public void clickWithJS(WebElement element, int x, int y) {
-        scrollWithJS(x,y);
+        scrollWithJS(x,y, 1000);
         click(element);
     }
 
     public void typeWithJS(WebElement element, String text, int x, int y) {
-        scrollWithJS(x,y);
+        scrollWithJS(x,y, 1000);
         type(element,text);
 
     }
@@ -99,5 +99,13 @@ public class BasePage {
     public void waitOfElementVisibility(WebElement element, int time){
         getWait(time).until(ExpectedConditions.visibilityOf(element));
 
+    }
+
+    public void pause(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
