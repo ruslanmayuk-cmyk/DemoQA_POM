@@ -56,4 +56,17 @@ public class HomePage extends BasePage {
         clickWithJS(elements,0,300);
         return new SidePanel(driver);
     }
+
+    //-------------------Upload_file_Data_picker-----------------------
+
+    @FindBy(css = ".card:nth-child(2)")
+    WebElement forms;
+
+    public SidePanel getForms() {
+
+        clickWithJS(forms,0,300);
+        return new SidePanel(driver);
+    }
+
+
 }
