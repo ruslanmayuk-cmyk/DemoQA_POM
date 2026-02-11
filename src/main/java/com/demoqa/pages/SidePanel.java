@@ -140,7 +140,7 @@ public class SidePanel extends BasePage {
     WebElement links;
 
     public LinksPage getLinks() {
-        clickWithJS(links,0,500);
+        clickWithJS(links,0,700);
         return new LinksPage(driver);
     }
 
