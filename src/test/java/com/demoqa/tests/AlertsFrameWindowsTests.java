@@ -8,6 +8,7 @@ import com.demoqa.pages.alertsFrameWindows.IframesPage;
 import com.demoqa.pages.alertsFrameWindows.WindowsPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class AlertsFrameWindowsTests extends TestBase {
@@ -52,8 +53,10 @@ public class AlertsFrameWindowsTests extends TestBase {
                 .verifyMessage("Hello group QA75!!!");
     }
 
+
     @Test
     @DisplayName("New tab opened")
+    @Tag("smoky")
     public void newTabTest() {
         sidePanel.getBrowserWindows();
         new WindowsPage(driver).clickOnNewTabButton()

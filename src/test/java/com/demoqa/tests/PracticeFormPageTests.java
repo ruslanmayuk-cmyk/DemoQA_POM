@@ -38,7 +38,7 @@ public class PracticeFormPageTests extends TestBase {
     // -------------NegativeTest--------------------------
 
     @RepeatedTest(value = 3,name = "{displayName}{currentRepetition}/{totalRepetitions}")
-    // запускаем тест 3 раза
+    // запускаем повторяющийся тест (3 раза)
 
     @DisplayName("Verify phone validation and try to get error ")
     public void createAccountWithInvalidPhoneNegativeTest() {

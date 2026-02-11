@@ -71,4 +71,45 @@ public class TextBoxPage extends BasePage {
 
         return this;
     }
+
+    // JavascriptExecutor -> BasePage
+    public TextBoxPage enterPersonalDataWithJS(String name, String email) {
+        js.executeScript("document.getElementById('userName').value='" + name + "';");
+        js.executeScript("document.getElementById('userName').style.border='5px solid red';");
+        return this;
+    }
+
+    public TextBoxPage clickWithJavaScript() {
+        js.executeScript("document.querySelector('#submit').click();");
+        js.executeScript("document.querySelector('#submit').style.backgroundColor='red';");
+        return this;
+    }
+
+    public TextBoxPage getInnerText() {
+        String innerText = js.executeScript( "return document. documentElement.innerText; ").toString();
+        System.out.println(innerText);
+        System.out.println("********************************************");
+        return this;
+    }
+
+    public TextBoxPage verifyURL() {
+        String url = js.executeScript( "return document.URL") .toString();
+        System.out.println("URL = " + url);
+        System.out.println("********************************************");
+        return this;
+
+    }
+
+
+    public TextBoxPage navigateToNewPage(String url) {
+        js.executeScript("window.location='" + url + "';");
+        return this;
+
+    }
+
+    public TextBoxPage verifyNewPageTitle() {
+        String pageTitle = js.executeScript("return document.title;").toString();
+        System.out.println(pageTitle);
+        return this;
+    }
 }

@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
 
     public SidePanel getAlertsFrameWindows() {
 
-        click(alertsFrameWindows);
+        clickWithJS(alertsFrameWindows,0,300);
         return new SidePanel(driver);
 
     }

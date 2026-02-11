@@ -19,7 +19,7 @@ public class SelectPage extends BasePage {
     WebElement oldSelectMenu;
 
     public SelectPage oldStyleSelect(String color) {
-
+        scrollWithJS(0,200,500);
         new Select(oldSelectMenu).selectByVisibleText(color);
         return this;
     }
