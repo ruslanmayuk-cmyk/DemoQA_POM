@@ -18,6 +18,7 @@ import java.util.Random;
 public class MyListener implements WebDriverListener {
 
     Logger logger = LoggerFactory.getLogger(MyListener.class);
+
     private final WebDriver driver;
 
     public MyListener(WebDriver driver) {
@@ -26,36 +27,28 @@ public class MyListener implements WebDriverListener {
 
     @Override
     public void onError(Object target, Method method, Object[] args, InvocationTargetException e) {
-        logger.error("We have a problem!");
-        logger.error("**************************");
+        logger.error("We have a problem!!!");
+        logger.error("********************************");
         logger.error("Method --> {}", method.getName());
-        logger.error("**************************");
+        logger.error("********************************");
         logger.error("Target exception --> {}", e.getCause());
+        logger.error("********************************");
 
         int i = new Random().nextInt(1000);
         String link = "screenshots/screen-" + i + ".png";
-        logger.error("Screen with error -> {}",link);
+        logger.error("Screen with error -> {}", link);
 
         File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            Files.copy(tmp,new File(link));
+            Files.copy(tmp, new File(link));
         } catch (IOException ex) {
-            logger.error("Failed to save screenshot",ex);
+            logger.error("Failed to save screenshot", ex);
         }
-
-
     }
 
     @Override
     public void afterGet(WebDriver driver, String url) {
-        logger.info("We opened web site {}",url);
-
-    }
-
-
-    @Override
-    public void afterFindElement(WebDriver driver, By locator, WebElement result) {
-        logger.info("We found element {}", result.getText());
+        logger.info("We opened web site {}", url);
     }
 
     @Override
@@ -63,32 +56,18 @@ public class MyListener implements WebDriverListener {
         logger.info("Total elements is {}", result.size());
     }
 
-
-    @Override
-    public void afterExecuteScript(WebDriver driver, String script, Object[] args, Object result) {
-        logger.info("Implemented script {} with result {}",script.toString(), result.toString());
-    }
-
-    @Override
-    public void afterPerform(WebDriver driver, Collection<Sequence> actions) {
-        logger.info("{}",actions.toString());
-    }
-
-
     @Override
     public void afterClick(WebElement element) {
-        logger.info("We clicked on element {}", element);
+        logger.info("We clicked on {}", element);
     }
 
     @Override
     public void afterSendKeys(WebElement element, CharSequence... keysToSend) {
-        logger.info("We send keys {} to element {}", element,keysToSend) ;
+        logger.info("We send keys {} to element {}", element, keysToSend);
     }
 
     @Override
     public void afterGetText(WebElement element, String result) {
-        logger.info("Element contains {}",element.getText());
+        logger.info("Element contains {}", element.getText());
     }
-
-
 }
